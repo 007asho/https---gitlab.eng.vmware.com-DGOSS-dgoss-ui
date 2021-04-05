@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { MainContainer } from "@vmware-react/clarity";
+import LandingPage from "./components/containers/LandingPage";
+import Insights from "./components/Insights";
+import DiscountGuidance from "./components/DiscountGuidance";
+import NotFound from "./components/NotFound";
+import "./App.css";
+import "./styles/layout.css";
+import "./styles/wizard.css";
 
-function App() {
+const App = () => {
+  const componentDidMount = () => {
+    //const token = await auth.setTableauToken();
+    //console.log("token");
+    //this.setState({ user });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainContainer>
+      <LandingPage />
+      <main className="main-content">
+        <Switch>
+          <Route path="/DiscountGuidance" component={DiscountGuidance} />
+          <Route path="/Notfound" component={NotFound} />
+          <Route path="/" exact component={Insights} />
+
+          <Redirect to="/Notfound" />
+        </Switch>
+      </main>
+    </MainContainer>
   );
-}
+};
 
 export default App;
